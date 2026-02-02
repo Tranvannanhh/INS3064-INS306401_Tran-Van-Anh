@@ -1,0 +1,15 @@
+<?php
+declare(strict_types=1);
+
+function safeDiv(float $a, float $b): ?float {
+    if ($b == 0.0) {
+        return null;
+    }
+
+    return $a / $b;
+}
+
+$result = safeDiv(10, 0);
+
+echo $result === null ? "null" : $result;
+?>
