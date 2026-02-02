@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+// Input: array of random scores
+$scores = [60, 75, 80, 90, 70];
+
+// Calculate stats
+$sum = array_sum($scores);
+$count = count($scores);
+$average = $sum / $count;
+
+$max = max($scores);
+$min = min($scores);
+
+// Filter scores greater than average
+$topScores = [];
+
+foreach ($scores as $score) {
+    if ($score > $average) {
+        $topScores[] = $score;
+    }
+}
+
+// Output
+echo "Avg: " . round($average) . ", Top: [" . implode(", ", $topScores) . "]";
+?>
