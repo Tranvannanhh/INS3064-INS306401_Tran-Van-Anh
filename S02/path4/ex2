@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+$students = [
+    ['name' => 'Alice', 'grade' => 90],
+    ['name' => 'Bob', 'grade' => 82],
+    ['name' => 'Charlie', 'grade' => 76],
+    ['name' => 'Daisy', 'grade' => 95]
+];
+
+echo "<table border='1' cellpadding='8' cellspacing='0'>";
+echo "<tr><th>Name</th><th>Grade</th></tr>";
+
+foreach ($students as $student) {
+    echo "<tr>";
+    echo "<td>{$student['name']}</td>";
+    echo "<td>{$student['grade']}</td>";
+    echo "</tr>";
+}
+
+echo "</table>";
+?>
