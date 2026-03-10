@@ -1,6 +1,6 @@
 # Session 06 – Database Design
 
-This repository contains the database design for Session 06, including normalization analysis, relationship explanation, ER diagrams, and SQL schema files.
+This repository contains the database design for Session 06 including normalization analysis, ER diagrams, and SQL schema files.
 
 ---
 
@@ -9,32 +9,32 @@ This repository contains the database design for Session 06, including normaliza
 | Table Name | Primary Key | Foreign Key | Normal Form | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | users | user_id | None | 3NF | Stores user account information |
-| posts | post_id | user_id | 3NF | Stores blog posts created by users |
-| categories | category_id | None | 3NF | Stores post categories |
-| tags | tag_id | None | 3NF | Stores tag labels |
-| post_tags | (post_id, tag_id) | post_id, tag_id | 3NF | Many-to-many relationship between posts and tags |
-| comments | comment_id | post_id, user_id | 3NF | Stores comments on blog posts |
+| posts | post_id | user_id | 3NF | Stores blog posts |
+| categories | category_id | None | 3NF | Stores blog categories |
+| tags | tag_id | None | 3NF | Stores tags |
+| post_tags | (post_id, tag_id) | post_id, tag_id | 3NF | Post-Tag relationship |
+| comments | comment_id | post_id, user_id | 3NF | Stores post comments |
 | patients | patient_id | None | 3NF | Stores patient information |
 | doctors | doctor_id | None | 3NF | Stores doctor information |
-| appointments | appointment_id | patient_id, doctor_id | 3NF | Stores appointment records |
-| prescriptions | prescription_id | appointment_id | 3NF | Stores prescriptions issued during appointments |
-| medicines | medicine_id | None | 3NF | Stores medicine information |
-| prescription_medicines | (prescription_id, medicine_id) | prescription_id, medicine_id | 3NF | Many-to-many relationship between prescriptions and medicines |
+| appointments | appointment_id | patient_id, doctor_id | 3NF | Appointment records |
+| prescriptions | prescription_id | appointment_id | 3NF | Medical prescriptions |
+| medicines | medicine_id | None | 3NF | Medicine list |
+| prescription_medicines | (prescription_id, medicine_id) | prescription_id, medicine_id | 3NF | Prescription-Medicine relationship |
 
 ---
 
 # Part 2: Relationships
 
-### Blog System
+## Blog System
 
-- **Users to Posts:** One-to-Many (1:N). A user can create multiple blog posts.
-- **Posts to Comments:** One-to-Many (1:N). A post can have many comments.
-- **Users to Comments:** One-to-Many (1:N). A user can write many comments.
-- **Posts to Tags:** Many-to-Many (N:N). A post can have multiple tags and a tag can belong to multiple posts.
+- Users → Posts: One-to-Many
+- Posts → Comments: One-to-Many
+- Users → Comments: One-to-Many
+- Posts → Tags: Many-to-Many
 
-### Hospital System
+## Hospital System
 
-- **Patients to Appointments:** One-to-Many (1:N). A patient can have multiple appointments.
-- **Doctors to Appointments:** One-to-Many (1:N). A doctor can handle multiple appointments.
-- **Appointments to Prescriptions:** One-to-One (1:1). Each appointment may generate one prescription.
-- **Prescriptions to Medicines:** Many-to-Many (N:N). A prescription can contain multiple medicines.
+- Patients → Appointments: One-to-Many
+- Doctors → Appointments: One-to-Many
+- Appointments → Prescriptions: One-to-One
+- Prescriptions → Medicines: Many-to-Many
