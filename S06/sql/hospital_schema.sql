@@ -1,68 +1,46 @@
-CREATE DATABASE hospital_management;
-USE hospital_management;
+CREATE DATABASE IF NOT EXISTS hospital_db;
+USE hospital_db;
 
--- PATIENTS
 CREATE TABLE patients (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
-  date_of_birth DATE,
-  phone VARCHAR(20)
+    patient_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birth_date DATE,
+    phone VARCHAR(20)
 );
 
--- DOCTORS
 CREATE TABLE doctors (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
-  specialization VARCHAR(150)
+    doctor_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    specialization VARCHAR(100)
 );
 
--- APPOINTMENTS
 CREATE TABLE appointments (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  patient_id INT NOT NULL,
-  doctor_id INT NOT NULL,
-  appointment_date DATETIME NOT NULL,
-
-  FOREIGN KEY (patient_id)
-    REFERENCES patients(id)
-    ON DELETE CASCADE,
-
-  FOREIGN KEY (doctor_id)
-    REFERENCES doctors(id)
+    appointment_id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT,
+    doctor_id INT,
+    appointment_date DATETIME,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
 );
 
--- PRESCRIPTIONS
 CREATE TABLE prescriptions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  appointment_id INT UNIQUE NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  FOREIGN KEY (appointment_id)
-    REFERENCES appointments(id)
-    ON DELETE CASCADE
+    prescription_id INT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id INT UNIQUE,
+    issued_date DATE,
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
 );
 
--- MEDICINES
 CREATE TABLE medicines (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
-  manufacturer VARCHAR(150)
+    medicine_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT
 );
 
--- PRESCRIPTION_MEDICINES (bridge table)
 CREATE TABLE prescription_medicines (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  prescription_id INT NOT NULL,
-  medicine_id INT NOT NULL,
-  dosage VARCHAR(80),
-  frequency VARCHAR(80),
-
-  FOREIGN KEY (prescription_id)
-    REFERENCES prescriptions(id)
-    ON DELETE CASCADE,
-
-  FOREIGN KEY (medicine_id)
-    REFERENCES medicines(id),
-
-  UNIQUE (prescription_id, medicine_id)
+    prescription_id INT,
+    medicine_id INT,
+    dosage VARCHAR(50),
+    PRIMARY KEY (prescription_id, medicine_id),
+    FOREIGN KEY (prescription_id) REFERENCES prescriptions(prescription_id),
+    FOREIGN KEY (medicine_id) REFERENCES medicines(medicine_id)
 );
