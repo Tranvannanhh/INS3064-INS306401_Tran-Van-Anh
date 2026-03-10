@@ -1,1 +1,9 @@
+Scenario 1: High-velocity social media feed
 
+I would choose a NoSQL database for this scenario.
+
+Social media platforms must handle massive write operations such as posts, comments, likes, and shares from millions of users. NoSQL databases support horizontal scalability, allowing the system to distribute data across multiple servers and handle very high traffic.
+
+Another advantage is schema flexibility. Social media data structures frequently change and include different types of content such as text, images, and videos. NoSQL databases can store flexible or semi-structured data without requiring strict schemas.
+
+Because performance and scalability are more important than strict ACID consistency in this case, NoSQL is the better choice for a high-velocity social media feed.
