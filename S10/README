@@ -1,0 +1,20 @@
+# Campus Service Request System
+
+A simple MVC mini project for MIS homework.
+
+## Features
+- Submit a request
+- View request list
+- View request details
+- Update request status
+
+## Folder Structure
+- app/Controllers
+- app/Models
+- app/Views
+- public/
+- docs/
+
+## Author
+- Your Name
+- Student ID
